@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.location);
+                Navigation.findNavController(view).navigate(R.id.);
             }
         });
 

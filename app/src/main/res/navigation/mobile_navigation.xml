@@ -39,5 +39,15 @@
         android:id="@+id/account"
         android:name="com.example.projrcte.AccountFragment"
         android:label="Account"
-        tools:layout="@layout/fragment_bottom4" />
+        tools:layout="@layout/fragment_account" />
+    <fragment
+        android:id="@+id/accerFragment"
+        android:name="com.example.projrcte.AccerFragment"
+        android:label="fragment_accer"
+        tools:layout="@layout/fragment_accer" />
+    <fragment
+        android:id="@+id/registraFragment"
+        android:name="com.example.projrcte.RegistraFragment"
+        android:label="fragment_registra"
+        tools:layout="@layout/fragment_registra" />
 </navigation>

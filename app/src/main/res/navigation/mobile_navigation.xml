@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/drawer1Fragment">
+    app:startDestination="@id/home">
 
     <fragment
         android:id="@+id/drawer1Fragment"
@@ -23,21 +23,21 @@
     <fragment
         android:id="@+id/home"
         android:name="com.example.projrcte.HomeFragment"
-        android:label="fragment_bottom1"
+        android:label="Home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/location"
         android:name="com.example.projrcte.LocationFragment"
-        android:label="fragment_bottom2"
+        android:label="Map"
         tools:layout="@layout/fragment_location" />
     <fragment
         android:id="@+id/cart"
-        android:name="com.example.projrcte.Bottom3Fragment"
-        android:label="fragment_bottom3"
+        android:name="com.example.projrcte.InicioFragment"
+        android:label="Shopping cart"
         tools:layout="@layout/fragment_bottom3" />
     <fragment
         android:id="@+id/account"
-        android:name="com.example.projrcte.bottom4Fragment"
-        android:label="fragment_bottom4"
+        android:name="com.example.projrcte.AccountFragment"
+        android:label="Account"
         tools:layout="@layout/fragment_bottom4" />
 </navigation>

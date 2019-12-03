@@ -1,4 +1,4 @@
-package com.example.projrcte;
+package com.example.projrcte.Bottom_Menu;
 
 
 import android.os.Bundle;
@@ -11,18 +11,21 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Button;
+
+import com.example.projrcte.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment {
+public class AccountFragment extends Fragment {
 
-    ImageView imageView;
+    Button button;
 
-    public HomeFragment() {
 
+    public AccountFragment() {
+        // Required empty public constructor
     }
 
 
@@ -30,22 +33,19 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
-
+        return inflater.inflate(R.layout.fragment_account, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        imageView = view.findViewById(R.id.loca);
-
-        imageView.setOnClickListener(new View.OnClickListener() {
+        button.findViewById(R.id.aacer);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.location);
+                Navigation.findNavController(view).navigate(R.id.accerFragment);
             }
         });
-
     }
 }

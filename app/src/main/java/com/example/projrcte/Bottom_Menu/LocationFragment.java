@@ -1,4 +1,4 @@
-package com.example.projrcte;
+package com.example.projrcte.Bottom_Menu;
 
 
 
@@ -43,25 +43,20 @@ import java.util.ArrayList;
  */
 public class LocationFragment extends SupportMapFragment implements OnMapReadyCallback {
 
-
-    private static final int MY_LOCATION_REQUEST_CODE = 1;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
 
         getMapAsync(this);
 
-
         return rootView;
     }
-
 
     @Override
     public void onMapReady(GoogleMap mMap) {
 
-        LatLng latLng = new LatLng(36.679582, -5.444791);
-        float zoom = 13;
+        LatLng latLng = new LatLng(41.455512, 2.201515);
+        float zoom = 15.2f;
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
         mMap.addMarker(new MarkerOptions().position(latLng));
     }

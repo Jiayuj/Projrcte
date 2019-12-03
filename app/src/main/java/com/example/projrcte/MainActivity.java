@@ -1,29 +1,15 @@
 package com.example.projrcte;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Looper;
-import android.provider.Settings;
-import android.util.Log;
 import android.view.Menu;
-import android.widget.Toast;
 
 
-import com.google.android.gms.maps.GoogleMap;
+import com.example.projrcte.Bottom_Menu.LocationFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -73,38 +59,5 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-
-    private static final String TAG = "MapActivity";
-    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-    private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-
-//    private Boolean mLocationPermissionsGranted = false;
-//    private GoogleMap mMap;
-//    private FusedLocationProviderClient mFusedLocationProviderClient;
-//
-//    private void getLocationPermission(){
-//        Log.d(TAG, "getLocationPermission: getting location permissions");
-//        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
-//                Manifest.permission.ACCESS_COARSE_LOCATION};
-//
-//        if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
-//                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-//            if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
-//                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-//                mLocationPermissionsGranted = true;
-//                initMap();
-//            }else{
-//                ActivityCompat.requestPermissions(this,
-//                        permissions,
-//                        LOCATION_PERMISSION_REQUEST_CODE);
-//            }
-//        }else{
-//            ActivityCompat.requestPermissions(this,
-//                    permissions,
-//                    LOCATION_PERMISSION_REQUEST_CODE);
-//        }
-//    }
-
 
 }

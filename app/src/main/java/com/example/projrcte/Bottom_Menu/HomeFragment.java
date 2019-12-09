@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.projrcte.R;
 
@@ -19,9 +20,10 @@ import com.example.projrcte.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     ImageView imageView;
+
 
     public HomeFragment() {
 
@@ -40,14 +42,19 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        imageView = view.findViewById(R.id.loca);
 
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.location);
-            }
-        });
+        view.findViewById(R.id.loca).setOnClickListener(this);
+        view.findViewById(R.id.tienda_icon).setOnClickListener(this);
+        view.findViewById(R.id.tienda_text).setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.tienda_icon: Navigation.findNavController(v).navigate(R.id.tienda); break;
+            case R.id.tienda_text: Navigation.findNavController(v).navigate(R.id.tienda); break;
+            case R.id.loca: Navigation.findNavController(v).navigate(R.id.location); break;
+        }
 
     }
 }

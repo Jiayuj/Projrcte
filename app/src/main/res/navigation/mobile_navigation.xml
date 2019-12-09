@@ -50,4 +50,9 @@
         android:name="com.example.projrcte.RegistraFragment"
         android:label="fragment_registra"
         tools:layout="@layout/fragment_registra" />
+    <fragment
+        android:id="@+id/tienda"
+        android:name="com.example.projrcte.TiendaFragment"
+        android:label="fragment_tienda"
+        tools:layout="@layout/fragment_tienda" />
 </navigation>

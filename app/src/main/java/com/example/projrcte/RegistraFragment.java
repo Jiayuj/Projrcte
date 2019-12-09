@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -15,6 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.List;
 
 
 /**
@@ -25,6 +27,7 @@ public class RegistraFragment extends Fragment {
     NavController navController;
     ViewModel viewModel;
     EditText emaileditText, passedittext;
+    TextView textView;
 
     public RegistraFragment() {
         // Required empty public constructor
@@ -45,16 +48,31 @@ public class RegistraFragment extends Fragment {
         navController = Navigation.findNavController(view);
         viewModel = ViewModelProviders.of(requireActivity()).get(ViewModel.class);
 
-        emaileditText.findViewById(R.id.edit_text_user);
-        passedittext.findViewById(R.id.edit_text_pass);
+        emaileditText = view.findViewById(R.id.regis_user);
+        passedittext = view.findViewById(R.id.regis_pass);
+
+        textView = view.findViewById(R.id.text11);
 
         view.findViewById(R.id.button_registra).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = emaileditText.getText().toString();
                 String pass = passedittext.getText().toString();
+                try {
+                    if (viewModel.comprobar(email,pass).getEmail().equals(email)){
+                        Navigation.findNavController(v).navigate(R.id.registraFragment);
+                    }
+                }catch (NullPointerException e){
+                    viewModel.registraUser(email,pass);
+                    Navigation.findNavController(v).navigate(R.id.home);
+                }
 
-                viewModel.registraUser(email,pass);
+            }
+        });
+        view.findViewById(R.id.button_mostra).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.mostra();
             }
         });
     }

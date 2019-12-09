@@ -6,12 +6,14 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 
 /**
@@ -20,6 +22,8 @@ import android.view.ViewGroup;
 public class AccerFragment extends Fragment {
 
     NavController navController;
+    ViewModel viewModel;
+    EditText emaileditText, passedittext;
 
     public AccerFragment() {
         // Required empty public constructor
@@ -38,12 +42,35 @@ public class AccerFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         navController = Navigation.findNavController(view);
+        viewModel = ViewModelProviders.of(requireActivity()).get(ViewModel.class);
+
+        emaileditText = view.findViewById(R.id.accer_user);
+        passedittext = view.findViewById(R.id.accer_pass);
+
+        view.findViewById(R.id.button_accer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = emaileditText.getText().toString();
+                String pass = passedittext.getText().toString();
+                User i = viewModel.comprobarAccer(email,pass);
+                try {
+                    if (i.getEmail().equals(email)&& i.getPass().equals(pass)){
+                        Navigation.findNavController(v).navigate(R.id.home);
+                    }
+                }catch (NullPointerException e){
+                    Navigation.findNavController(v).navigate(R.id.accerFragment);
+                }
+
+            }
+        });
 
         view.findViewById(R.id.text_view_registra).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navController.navigate(R.id.text_view_registra);
+                Navigation.findNavController(view).navigate(R.id.registraFragment);
             }
         });
+
+
     }
 }

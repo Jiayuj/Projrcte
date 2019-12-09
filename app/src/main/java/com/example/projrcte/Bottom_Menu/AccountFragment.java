@@ -23,7 +23,6 @@ public class AccountFragment extends Fragment {
 
     Button button;
 
-
     public AccountFragment() {
         // Required empty public constructor
     }
@@ -40,7 +39,7 @@ public class AccountFragment extends Fragment {
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        button.findViewById(R.id.aacer);
+        button = view.findViewById(R.id.aacer);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

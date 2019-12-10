@@ -39,12 +39,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LocationFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener, LocationListener {
+public class LocationFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMyLocationClickListener, GoogleMap.OnMyLocationButtonClickListener {
 
     private static int MY_LOCATION_REQUEST_CODE = 1;
     private GoogleMap mMap;
     LocationManager locationManager;
-    LocationListener locationListener;
+    private Location mLastLocation;
 
     public LocationFragment() {
 
@@ -71,14 +71,13 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
                 == PackageManager.PERMISSION_GRANTED) {
             return MY_LOCATION_REQUEST_CODE = 1;
         } else {
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     0);
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                     0);
         }
         return 0;
+
     }
 
     @Override
@@ -131,10 +130,6 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
         Toast.makeText(requireActivity(), "MyLocation button clicked", Toast.LENGTH_SHORT).show();
         // Return false so that we don't consume the event and the default behavior still occurs
         // (the camera animates to the user's current position).
-
-        LatLng sydney = new LatLng(41.455487,2.201519);
-        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(sydney, 20);
-        mMap.animateCamera(update);
         return true;
     }
 
@@ -148,7 +143,8 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
             Log.i("SS"," : "+dLongitude);
             mMap.addMarker(new MarkerOptions().position(
                     new LatLng(dLatitude, dLongitude)).title("My Location"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(dLatitude, dLongitude), 8));
+            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(new LatLng(dLatitude, dLongitude), 13.5f);
+            mMap.animateCamera(update);
 
         }
         else
@@ -158,27 +154,4 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
 
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
-        LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
-        mMap.addMarker(new MarkerOptions().position(loc));
-        if(mMap != null){
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 16.0f));
-        }
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-
-    }
 }

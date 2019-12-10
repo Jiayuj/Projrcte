@@ -4,9 +4,7 @@ package com.example.projrcte.Bottom_Menu;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
@@ -31,7 +29,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -44,10 +41,8 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
     private static int MY_LOCATION_REQUEST_CODE = 1;
     private GoogleMap mMap;
     LocationManager locationManager;
-    private Location mLastLocation;
 
     public LocationFragment() {
-
     }
 
     @Override
@@ -58,7 +53,7 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        location1();
+        premiso();
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
@@ -66,7 +61,7 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
 
     }
 
-    public int location1() {
+    public int premiso() {
         if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             return MY_LOCATION_REQUEST_CODE = 1;
@@ -77,7 +72,6 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
                     0);
         }
         return 0;
-
     }
 
     @Override
@@ -96,7 +90,6 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
         mMap = googleMap;
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
@@ -104,54 +97,42 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
 
         mMap.setMyLocationEnabled(true);
 
-
         mMap.setOnMyLocationButtonClickListener(this);
         mMap.setOnMyLocationClickListener(this);
 
-        // Add a marker in Sydney, Australia, and move the camera.
-//        LatLng sydney = new LatLng(41.455487,2.201519);
-
-        LatLng sydney = new LatLng(1, 1);
-
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Puig"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 15.2f));
+        getCurrentLocation();
 
     }
 
     @Override
     public void onMyLocationClick(@NonNull Location location) {
         Toast.makeText(requireActivity(), "Current location:\n" + location, Toast.LENGTH_LONG).show();
-
     }
 
     @Override
     public boolean onMyLocationButtonClick() {
         getCurrentLocation();
-        Toast.makeText(requireActivity(), "MyLocation button clicked", Toast.LENGTH_SHORT).show();
         // Return false so that we don't consume the event and the default behavior still occurs
         // (the camera animates to the user's current position).
         return true;
     }
 
     private void getCurrentLocation() {
+        mMap.clear();
         Location myLocation  = mMap.getMyLocation();
-        if(myLocation!=null)
-        {
+        if(myLocation!=null) {
             double dLatitude = myLocation.getLatitude();
             double dLongitude = myLocation.getLongitude();
             Log.i("SS"," : "+dLatitude);
             Log.i("SS"," : "+dLongitude);
-            mMap.addMarker(new MarkerOptions().position(
-                    new LatLng(dLatitude, dLongitude)).title("My Location"));
-            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(new LatLng(dLatitude, dLongitude), 13.5f);
+            mMap.addMarker(new MarkerOptions().position(new LatLng(dLatitude, dLongitude)).title("My Location"));
+            CameraUpdate update = CameraUpdateFactory.newLatLngZoom(new LatLng(dLatitude, dLongitude), 15.2f);
             mMap.animateCamera(update);
-
-        }
-        else
-        {
+        } else {
+            LatLng sydney = new LatLng(41.455487,2.201519);
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 15.0f));
             Toast.makeText(requireActivity(), "Unable to fetch the current location", Toast.LENGTH_SHORT).show();
         }
-
     }
 
 }

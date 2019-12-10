@@ -130,7 +130,7 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
             mMap.animateCamera(update);
         } else {
             LatLng sydney = new LatLng(41.455487,2.201519);
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 15.0f));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 15.2f));
             Toast.makeText(requireActivity(), "Unable to fetch the current location", Toast.LENGTH_SHORT).show();
         }
     }

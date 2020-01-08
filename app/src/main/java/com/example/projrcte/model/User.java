@@ -1,4 +1,4 @@
-package com.example.projrcte;
+package com.example.projrcte.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -8,8 +8,10 @@ import androidx.room.PrimaryKey;
 public class User  {
     @PrimaryKey(autoGenerate = true)
     public int id;
+
     @ColumnInfo(name = "email")
     public String email;
+
     @ColumnInfo(name = "pass")
     public String pass;
 

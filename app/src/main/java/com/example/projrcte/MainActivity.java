@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.Menu;
 
 
-import com.example.projrcte.Bottom_Menu.LocationFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -19,7 +18,6 @@ import androidx.navigation.ui.NavigationUI;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    private LocationFragment locationFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.drawer1Fragment, R.id.drawer2Fragment,R.id.drawer3Fragment,
-                R.id.home, R.id.location, R.id.cart,R.id.account
+                R.id.homefragment, R.id.locationFragment, R.id.cartFragment,R.id.accountFragment
         )
                 .setDrawerLayout(drawer)
                 .build();

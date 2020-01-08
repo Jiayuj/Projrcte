@@ -59,12 +59,12 @@ public class RegistraFragment extends Fragment {
                 String email = emaileditText.getText().toString();
                 String pass = passedittext.getText().toString();
                 try {
-                    if (viewModel.comprobar(email,pass).getEmail().equals(email)){
+                    if (viewModel.comprobar(email,pass).equals(email)){
                         Navigation.findNavController(v).navigate(R.id.registraFragment);
                     }
                 }catch (NullPointerException e){
                     viewModel.registraUser(email,pass);
-                    Navigation.findNavController(v).navigate(R.id.home);
+                    Navigation.findNavController(v).navigate(R.id.homefragment);
                 }
 
             }

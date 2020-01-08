@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.example.projrcte.model.User;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,7 +57,7 @@ public class AccerFragment extends Fragment {
                 User i = viewModel.comprobarAccer(email,pass);
                 try {
                     if (i.getEmail().equals(email)&& i.getPass().equals(pass)){
-                        Navigation.findNavController(v).navigate(R.id.home);
+                        Navigation.findNavController(v).navigate(R.id.homefragment);
                     }
                 }catch (NullPointerException e){
                     Navigation.findNavController(v).navigate(R.id.accerFragment);

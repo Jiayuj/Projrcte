@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/home">
+    app:startDestination="@id/homefragment">
 
     <fragment
         android:id="@+id/drawer1Fragment"
@@ -21,22 +21,22 @@
         android:label="fragment_drawer3"
         tools:layout="@layout/fragment_drawer3" />
     <fragment
-        android:id="@+id/home"
+        android:id="@+id/homefragment"
         android:name="com.example.projrcte.Bottom_Menu.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/location"
+        android:id="@+id/locationFragment"
         android:name="com.example.projrcte.Bottom_Menu.LocationFragment"
         android:label="Map"
         tools:layout="@layout/fragment_location" />
     <fragment
-        android:id="@+id/cart"
+        android:id="@+id/cartFragment"
         android:name="com.example.projrcte.Bottom_Menu.CartFragment"
         android:label="Shopping cart"
         tools:layout="@layout/fragment_bottom3" />
     <fragment
-        android:id="@+id/account"
+        android:id="@+id/accountFragment"
         android:name="com.example.projrcte.Bottom_Menu.AccountFragment"
         android:label="Account"
         tools:layout="@layout/fragment_account" />
@@ -51,7 +51,7 @@
         android:label="fragment_registra"
         tools:layout="@layout/fragment_registra" />
     <fragment
-        android:id="@+id/tienda"
+        android:id="@+id/tiendaFragment"
         android:name="com.example.projrcte.TiendaFragment"
         android:label="fragment_tienda"
         tools:layout="@layout/fragment_tienda" />

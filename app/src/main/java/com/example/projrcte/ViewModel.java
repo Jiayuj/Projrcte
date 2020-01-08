@@ -3,26 +3,34 @@ package com.example.projrcte;
 import android.app.Application;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-import androidx.room.Query;
+import androidx.lifecycle.MutableLiveData;
 
+import com.example.projrcte.bd.AppBBDD;
+import com.example.projrcte.bd.AppDao;
+import com.example.projrcte.model.Restaurante;
+import com.example.projrcte.model.User;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class ViewModel extends AndroidViewModel {
 
     private AppDao appDao;
-    User existe;
+    String existe;
     User correct;
+
+    public MutableLiveData<List<Restaurante>> listaElementos = new MutableLiveData<>();
+    public MutableLiveData<Restaurante> elementoSeleccionado = new MutableLiveData<>();
+
     public ViewModel(@NonNull Application application) {
         super(application);
+        rellenarListaElementos();
         appDao = AppBBDD.getInstance(application).appDao();
+
     }
 
     public User comprobarAccer (final String email, final String pass) {
@@ -30,17 +38,18 @@ public class ViewModel extends AndroidViewModel {
             @Override
             public void run() {
                 correct=appDao.findByEmailAndPass(email,pass);
+
             }
         });
         return correct;
     }
 
-    public User comprobar(final String email, final String pass) {
+    public String comprobar(final String email, final String pass) {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
 //                try {
-                    existe = appDao.findByEmail(email);
+                    existe = appDao.findByEmail(email).getEmail();
 //                    existe =true;
 //                    Log.e("SS", "Email existe ");
 //                }catch (NullPointerException e){
@@ -67,5 +76,20 @@ public class ViewModel extends AndroidViewModel {
                 }
             }
         });
+    }
+
+    public void rellenarListaElementos(){
+        List<Restaurante> restaurantes = new ArrayList<>();
+        for (int i = 0; i < 200; i++) {
+            Restaurante restaurante = new Restaurante();
+            restaurante.id = i;
+            restaurante.nombre = "Restaurante " + i;
+            restaurante.descripcion = "Descripcion " + i;
+            restaurantes.add(restaurante);
+        }
+        listaElementos.setValue(restaurantes);
+    }
+    public void establecerElementoSeleccionado(Restaurante restaurante){
+        elementoSeleccionado.setValue(restaurante);
     }
 }

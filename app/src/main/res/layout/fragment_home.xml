@@ -11,264 +11,102 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_margin="24dp"
-            >
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@android:color/holo_blue_light"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/loca"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center_vertical"
-                app:srcCompat="@drawable/ic_location_on_black_24dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"                >
+
+                <ImageView
+                    android:id="@+id/loca"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    app:srcCompat="@drawable/ic_location_on_black_24dp"
+
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Tu Localizacion"
+                    android:textColor="@color/cardview_light_background"/>
+            </LinearLayout>
 
             <SearchView
                 android:id="@+id/simpleSearchView"
                 android:layout_width="match_parent"
-                android:layout_marginRight="16dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
                 android:iconifiedByDefault="false"
                 android:queryHint="Search Here"
-                android:layout_gravity="center_vertical"
+                android:layout_margin="8dp"
+                android:background="@color/cardview_light_background"
                 />
 
         </LinearLayout>
 
-        <ScrollView
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="7"
-            android:layout_margin="16dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="--------- RECOMENDADO ---------"
+            android:gravity="center"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
             >
-            <LinearLayout
-                android:id="@+id/list_item1"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ordenar por: "
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Distancia "
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Envio "
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Valoracion "
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:orientation="horizontal">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/item_list"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="3"
-                android:orientation="vertical"
-                android:scrollbars="vertical"
-                >
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:layout_margin="24dp"
-                        android:orientation="vertical"
-                        >
-                        <TextView
-                            android:id="@+id/tienda_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="AAAAAAA"
-                            android:textSize="36sp"
-                            />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="aaaaa"
-                            android:textSize="24dp"
-                            />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="sssss"
-                            android:textSize="24sp"
-                            />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/tienda_icon"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="AAAA"
-
-                        app:srcCompat="@drawable/ic_favorite_black_24dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:layout_margin="24dp"
-                        android:orientation="vertical"
-                        >
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="AAAAAAA"
-                            android:textSize="36sp"
-                            />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="aaaaa"
-                            android:textSize="24dp"
-                            />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="sssss"
-                            android:textSize="24sp"
-                            />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="AAAA"
-
-                        app:srcCompat="@drawable/ic_favorite_black_24dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:layout_margin="24dp"
-                        android:orientation="vertical"
-                        >
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="AAAAAAA"
-                            android:textSize="36sp"
-                            />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="aaaaa"
-                            android:textSize="24dp"
-                            />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="sssss"
-                            android:textSize="24sp"
-                            />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="AAAA"
-
-                        app:srcCompat="@drawable/ic_favorite_black_24dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:layout_margin="24dp"
-                        android:orientation="vertical"
-                        >
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="AAAAAAA"
-                            android:textSize="36sp"
-                            />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="aaaaa"
-                            android:textSize="24dp"
-                            />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="sssss"
-                            android:textSize="24sp"
-                            />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="AAAA"
-
-                        app:srcCompat="@drawable/ic_favorite_black_24dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:layout_margin="24dp"
-                        android:orientation="vertical"
-                        >
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="AAAAAAA"
-                            android:textSize="36sp"
-                            />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="aaaaa"
-                            android:textSize="24dp"
-                            />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="sssss"
-                            android:textSize="24sp"
-                            />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="AAAA"
-
-                        app:srcCompat="@drawable/ic_favorite_black_24dp" />
-                </LinearLayout>
-            </LinearLayout>
-
-
-
-        </ScrollView>
-
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </LinearLayout>
 
     </LinearLayout>
 

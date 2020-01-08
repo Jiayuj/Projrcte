@@ -1,11 +1,11 @@
-package com.example.projrcte;
+package com.example.projrcte.bd;
 
-import android.widget.TextView;
-
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+
+import com.example.projrcte.model.Restaurante;
+import com.example.projrcte.model.User;
 
 import java.util.List;
 
@@ -22,5 +22,8 @@ public interface  AppDao  {
 
    @Insert
    public void insertarUser(User user);
+
+   @Insert
+   public void insertarRestaurante(Restaurante restaurante);
 
 }

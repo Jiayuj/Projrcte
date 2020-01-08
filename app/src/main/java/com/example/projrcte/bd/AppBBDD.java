@@ -1,18 +1,19 @@
-package com.example.projrcte;
+package com.example.projrcte.bd;
 
 import android.content.Context;
-import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import java.util.List;
+import com.example.projrcte.model.Protucto;
+import com.example.projrcte.model.Restaurante;
+import com.example.projrcte.model.User;
 
-@Database(entities = {User.class}, version = 2,exportSchema = false)
+@Database(entities = {User.class, Restaurante.class, Protucto.class
+}, version = 3,exportSchema = false)
 public abstract class AppBBDD extends RoomDatabase {
     public static AppBBDD appBBDD;
 

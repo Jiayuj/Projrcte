@@ -27,7 +27,7 @@ public class RegistraFragment extends Fragment {
     NavController navController;
     ViewModel viewModel;
     EditText emaileditText, passedittext;
-    TextView textView;
+
 
     public RegistraFragment() {
         // Required empty public constructor
@@ -50,8 +50,6 @@ public class RegistraFragment extends Fragment {
 
         emaileditText = view.findViewById(R.id.regis_user);
         passedittext = view.findViewById(R.id.regis_pass);
-
-        textView = view.findViewById(R.id.text11);
 
         view.findViewById(R.id.button_registra).setOnClickListener(new View.OnClickListener() {
             @Override

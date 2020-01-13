@@ -33,7 +33,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     ViewModel viewModel1;
     NavController navController;
-
     ElementosAdapter elementosAdapter;
 
 

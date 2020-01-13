@@ -80,7 +80,7 @@ public class ViewModel extends AndroidViewModel {
 
     public void rellenarListaElementos(){
         List<Restaurante> restaurantes = new ArrayList<>();
-        for (int i = 0; i < 200; i++) {
+        for (int i = 0; i < 25; i++) {
             Restaurante restaurante = new Restaurante();
             restaurante.id = i;
             restaurante.nombre = "Restaurante " + i;

@@ -34,7 +34,7 @@
         android:id="@+id/cartFragment"
         android:name="com.example.projrcte.Bottom_Menu.CartFragment"
         android:label="Shopping cart"
-        tools:layout="@layout/fragment_bottom3" />
+        tools:layout="@layout/fragment_cart" />
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.example.projrcte.Bottom_Menu.AccountFragment"

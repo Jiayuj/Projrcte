@@ -26,6 +26,10 @@ public class ViewModel extends AndroidViewModel {
     public MutableLiveData<List<Restaurante>> listaElementos = new MutableLiveData<>();
     public MutableLiveData<Restaurante> elementoSeleccionado = new MutableLiveData<>();
 
+    public MutableLiveData<List<String>> listaCart = new MutableLiveData<>();
+    public MutableLiveData<String> elementoCart = new MutableLiveData<>();
+    List<String> restaurantes = new ArrayList<>();
+
     public ViewModel(@NonNull Application application) {
         super(application);
         rellenarListaElementos();
@@ -91,5 +95,13 @@ public class ViewModel extends AndroidViewModel {
     }
     public void establecerElementoSeleccionado(Restaurante restaurante){
         elementoSeleccionado.setValue(restaurante);
+    }
+
+    public void rellenarListaCart(String nomTienda){
+        restaurantes.add(nomTienda);
+        listaCart.setValue(restaurantes);
+    }
+    public void establecerElementoCart(String nomTienda){
+        elementoCart.setValue(nomTienda);
     }
 }

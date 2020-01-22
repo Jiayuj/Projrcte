@@ -55,4 +55,9 @@
         android:name="com.example.projrcte.TiendaFragment"
         android:label="fragment_tienda"
         tools:layout="@layout/fragment_tienda" />
+    <fragment
+        android:id="@+id/detalleCartFragment"
+        android:name="com.example.projrcte.DetalleCartFragment"
+        android:label="fragment_detalle_cart"
+        tools:layout="@layout/fragment_detalle_cart" />
 </navigation>

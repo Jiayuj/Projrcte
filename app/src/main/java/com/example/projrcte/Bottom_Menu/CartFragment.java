@@ -3,13 +3,26 @@ package com.example.projrcte.Bottom_Menu;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.projrcte.R;
+import com.example.projrcte.ViewModel;
+import com.example.projrcte.model.Restaurante;
+
+import java.util.List;
 
 
 /**
@@ -17,6 +30,9 @@ import com.example.projrcte.R;
  */
 public class CartFragment extends Fragment {
 
+    ViewModel viewModel1;
+    NavController navController;
+    CartFragment.ElementosCartAdapter elementosCartAdapter;
 
     public CartFragment() {
         // Required empty public constructor
@@ -30,4 +46,70 @@ public class CartFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_cart, container, false);
     }
 
+    @Override
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        viewModel1 = ViewModelProviders.of(requireActivity()).get(ViewModel.class);
+        navController = Navigation.findNavController(view);
+
+        RecyclerView elementosRecyclerView = view.findViewById(R.id.item_list1);
+        elementosRecyclerView.addItemDecoration(new DividerItemDecoration(elementosRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
+
+        elementosCartAdapter = new CartFragment.ElementosCartAdapter();
+        elementosRecyclerView.setAdapter(elementosCartAdapter);
+
+        viewModel1.listaCart.observe(getViewLifecycleOwner(), new Observer<List<String>>() {
+            @Override
+            public void onChanged(List<String> restaurantes) {
+                elementosCartAdapter.establecerListCart(restaurantes);
+            }
+        });
+
+    }
+
+
+    class ElementosCartAdapter extends RecyclerView.Adapter<CartFragment.ElementosCartAdapter.ElementoCartViewHolder>{
+
+        List<String> restaurantes;
+
+        @NonNull
+        @Override
+        public CartFragment.ElementosCartAdapter.ElementoCartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new CartFragment.ElementosCartAdapter.ElementoCartViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_cart, parent, false));
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull CartFragment.ElementosCartAdapter.ElementoCartViewHolder holder, final int position) {
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    viewModel1.establecerElementoCart(restaurantes.get(position));
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return restaurantes == null ? 0 : restaurantes.size();
+        }
+
+        public void establecerListCart(List<String> restaurantes){
+            this.restaurantes = restaurantes;
+            notifyDataSetChanged();
+        }
+
+        class ElementoCartViewHolder extends RecyclerView.ViewHolder {
+            TextView nombreTextView;
+
+            public ElementoCartViewHolder(@NonNull View itemView) {
+                super(itemView);
+                nombreTextView = itemView.findViewById(R.id.nombre_tienda);
+            }
+        }
+    }
+
 }
+
+

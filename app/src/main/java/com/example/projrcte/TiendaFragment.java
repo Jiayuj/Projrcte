@@ -64,7 +64,7 @@ public class TiendaFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nombreTienda = nombreTextView.toString();
+                String nombreTienda = nombreTextView.getText().toString();
                 viewModel.rellenarListaCart(nombreTienda);
             }
         });

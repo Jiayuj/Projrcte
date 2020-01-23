@@ -45,14 +45,13 @@ public class DetalleCartFragment extends Fragment {
 
         principalViewModel = ViewModelProviders.of(requireActivity()).get(ViewModel.class);
 
-        nombreTextView = view.findViewById(R.id.nomd);
+        nombreTextView = view.findViewById(R.id.nombre_tienda1);
 
-        principalViewModel.elementoSeleccionado.observe(getViewLifecycleOwner(), new Observer<Restaurante>() {
+        principalViewModel.elementoCart.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
-            public void onChanged(final Restaurante restaurante) {
+            public void onChanged(final String restaurante) {
                 if (restaurante == null) return;
-
-                nombreTextView.setText(restaurante.nombre);
+                nombreTextView.setText(restaurante);
             }
         });
     }

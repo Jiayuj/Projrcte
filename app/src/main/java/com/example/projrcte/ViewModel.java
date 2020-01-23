@@ -100,6 +100,7 @@ public class ViewModel extends AndroidViewModel {
     public void rellenarListaCart(String nomTienda){
         restaurantes.add(nomTienda);
         listaCart.setValue(restaurantes);
+
     }
     public void establecerElementoCart(String nomTienda){
         elementoCart.setValue(nomTienda);

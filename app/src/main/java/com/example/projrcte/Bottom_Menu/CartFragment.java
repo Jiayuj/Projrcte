@@ -22,6 +22,7 @@ import com.example.projrcte.R;
 import com.example.projrcte.ViewModel;
 import com.example.projrcte.model.Restaurante;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -32,7 +33,7 @@ public class CartFragment extends Fragment {
 
     ViewModel viewModel1;
     NavController navController;
-    CartFragment.ElementosCartAdapter elementosCartAdapter;
+    ElementosCartAdapter elementosCartAdapter;
 
     public CartFragment() {
         // Required empty public constructor
@@ -56,7 +57,7 @@ public class CartFragment extends Fragment {
         RecyclerView elementosRecyclerView = view.findViewById(R.id.item_list1);
         elementosRecyclerView.addItemDecoration(new DividerItemDecoration(elementosRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
-        elementosCartAdapter = new CartFragment.ElementosCartAdapter();
+        elementosCartAdapter = new ElementosCartAdapter();
         elementosRecyclerView.setAdapter(elementosCartAdapter);
 
         viewModel1.listaCart.observe(getViewLifecycleOwner(), new Observer<List<String>>() {
@@ -69,23 +70,27 @@ public class CartFragment extends Fragment {
     }
 
 
-    class ElementosCartAdapter extends RecyclerView.Adapter<CartFragment.ElementosCartAdapter.ElementoCartViewHolder>{
+    class ElementosCartAdapter extends RecyclerView.Adapter<ElementosCartAdapter.ElementoCartViewHolder>{
 
         List<String> restaurantes;
 
         @NonNull
         @Override
-        public CartFragment.ElementosCartAdapter.ElementoCartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new CartFragment.ElementosCartAdapter.ElementoCartViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_cart, parent, false));
+        public ElementoCartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new ElementoCartViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_cart, parent, false));
         }
 
         @Override
-        public void onBindViewHolder(@NonNull CartFragment.ElementosCartAdapter.ElementoCartViewHolder holder, final int position) {
+        public void onBindViewHolder(@NonNull ElementoCartViewHolder holder, final int position) {
+
+
+            holder.nombre.setText(restaurantes.get(position));
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     viewModel1.establecerElementoCart(restaurantes.get(position));
+                    navController.navigate(R.id.detalleCartFragment);
                 }
             });
         }
@@ -101,11 +106,11 @@ public class CartFragment extends Fragment {
         }
 
         class ElementoCartViewHolder extends RecyclerView.ViewHolder {
-            TextView nombreTextView;
+            TextView nombre;
 
             public ElementoCartViewHolder(@NonNull View itemView) {
                 super(itemView);
-                nombreTextView = itemView.findViewById(R.id.nombre_tienda);
+                nombre = itemView.findViewById(R.id.nombre_tienda);
             }
         }
     }

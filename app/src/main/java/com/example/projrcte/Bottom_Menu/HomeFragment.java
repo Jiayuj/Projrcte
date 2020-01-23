@@ -123,7 +123,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         class ElementoViewHolder extends RecyclerView.ViewHolder {
             TextView nombreTextView, descripcionTextView;
 
-
             public ElementoViewHolder(@NonNull View itemView) {
                 super(itemView);
                 nombreTextView = itemView.findViewById(R.id.textview_nombre);

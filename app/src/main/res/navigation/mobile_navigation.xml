@@ -6,10 +6,10 @@
     app:startDestination="@id/homefragment">
 
     <fragment
-        android:id="@+id/drawer1Fragment"
-        android:name="com.example.projrcte.Drawer1Fragment"
-        android:label="fragment_drawer1"
-        tools:layout="@layout/fragment_drawer1" />
+        android:id="@+id/notifyFragment"
+        android:name="com.example.projrcte.NotifyFragment"
+        android:label="Noticicion"
+        tools:layout="@layout/fragment_notify" />
     <fragment
         android:id="@+id/drawer2Fragment"
         android:name="com.example.projrcte.Drawer2Fragment"

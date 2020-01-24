@@ -14,6 +14,7 @@ import com.example.projrcte.model.Restaurante;
 import com.example.projrcte.model.User;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -28,7 +29,7 @@ public class ViewModel extends AndroidViewModel {
 
     public MutableLiveData<List<String>> listaCart = new MutableLiveData<>();
     public MutableLiveData<String> elementoCart = new MutableLiveData<>();
-    List<String> restaurantes = new ArrayList<>();
+    HashSet<String> restaurantes = new HashSet<>();
 
     public ViewModel(@NonNull Application application) {
         super(application);
@@ -99,7 +100,8 @@ public class ViewModel extends AndroidViewModel {
 
     public void rellenarListaCart(String nomTienda){
         restaurantes.add(nomTienda);
-        listaCart.setValue(restaurantes);
+        List<String> list = new ArrayList<String>(restaurantes);
+        listaCart.setValue(list);
 
     }
     public void establecerElementoCart(String nomTienda){

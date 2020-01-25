@@ -67,11 +67,5 @@ public class RegistraFragment extends Fragment {
 
             }
         });
-        view.findViewById(R.id.button_mostra).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewModel.mostra();
-            }
-        });
     }
 }

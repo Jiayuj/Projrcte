@@ -22,6 +22,8 @@ import android.widget.TextView;
 import com.example.projrcte.model.Restaurante;
 import com.example.projrcte.R;
 import com.example.projrcte.ViewModel;
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetView;
 
 import java.util.List;
 
@@ -70,7 +72,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 elementosAdapter.establecerListaElementos(restaurantes);
             }
         });
-
     }
 
     @Override

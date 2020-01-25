@@ -43,7 +43,7 @@
     <fragment
         android:id="@+id/accerFragment"
         android:name="com.example.projrcte.AccerFragment"
-        android:label="fragment_accer"
+        android:label="Login"
         tools:layout="@layout/fragment_accer" />
     <fragment
         android:id="@+id/registraFragment"

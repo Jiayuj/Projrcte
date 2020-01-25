@@ -1,9 +1,12 @@
 package com.example.projrcte;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 
 
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -43,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
         BottomNavigationView bottomNavView = findViewById(R.id.bottom_nav_view);
         NavigationUI.setupWithNavController(bottomNavView, navController);
-
     }
 
     @Override

@@ -13,13 +13,18 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.projrcte.R;
+import com.example.projrcte.TiendaFragment;
 import com.example.projrcte.ViewModel;
+import com.example.projrcte.model.Protucto;
 import com.example.projrcte.model.Restaurante;
 
 import java.util.Collections;
@@ -34,7 +39,8 @@ public class CartFragment extends Fragment {
     ViewModel viewModel1;
     NavController navController;
     ElementosCartAdapter elementosCartAdapter;
-
+    ListaCartProductAdapter listaCartProductAdapter;
+    TextView totalPrecio;
     public CartFragment() {
         // Required empty public constructor
     }
@@ -67,9 +73,15 @@ public class CartFragment extends Fragment {
             }
         });
 
+        totalPrecio = view.findViewById(R.id.cart_total_precio);
+        try {
+            double cant = 10 * viewModel1.listaCartProtuct.getValue().size()* viewModel1.listaCart.getValue().size();
+            totalPrecio.setText(Double.toString(cant));
+        }catch (NullPointerException e ){
+
+        }
+
     }
-
-
     class ElementosCartAdapter extends RecyclerView.Adapter<ElementosCartAdapter.ElementoCartViewHolder>{
 
         List<String> restaurantes;
@@ -111,6 +123,95 @@ public class CartFragment extends Fragment {
             public ElementoCartViewHolder(@NonNull View itemView) {
                 super(itemView);
                 nombre = itemView.findViewById(R.id.nombre_tienda);
+
+                RecyclerView protuctoCartRecyclerView = itemView.findViewById(R.id.item_cart_producto);
+                protuctoCartRecyclerView.addItemDecoration(new DividerItemDecoration(protuctoCartRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
+
+                listaCartProductAdapter = new ListaCartProductAdapter();
+                protuctoCartRecyclerView.setAdapter(listaCartProductAdapter);
+
+                viewModel1.listaCartProtuct.observe(getViewLifecycleOwner(), new Observer<List<Protucto>>() {
+                    @Override
+                    public void onChanged(List<Protucto> protuctos) {
+                        listaCartProductAdapter.establecerListCart(protuctos);
+                    }
+                });
+            }
+        }
+    }
+
+    class ListaCartProductAdapter extends RecyclerView.Adapter<ListaCartProductAdapter.ListaCartProductViewHolder>{
+
+        List<Protucto> protuctos;
+
+        @NonNull
+        @Override
+        public ListaCartProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new ListaCartProductViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_cartproduct, parent, false));
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ListaCartProductViewHolder holder, final int position) {
+
+            final Protucto protucto = protuctos.get(position);
+
+            holder.nombrecartProtucto.setText(protucto.nombre);
+            holder.descripcioncartProtuto.setText(protucto.descripcion);
+            holder.preciocartProtucto.setText(protucto.precio);
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return protuctos == null ? 0 : protuctos.size();
+        }
+
+        public void establecerListCart(List<Protucto> protuctos){
+            this.protuctos = protuctos;
+            notifyDataSetChanged();
+        }
+
+        class ListaCartProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+            TextView nombrecartProtucto, descripcioncartProtuto, preciocartProtucto;
+
+            ImageView mas, meno;
+            TextView cant;
+
+            public ListaCartProductViewHolder(@NonNull View itemView) {
+                super(itemView);
+                nombrecartProtucto = itemView.findViewById(R.id.nombre_cart_protucto);
+                descripcioncartProtuto = itemView.findViewById(R.id.des_cart_protucto);
+                preciocartProtucto = itemView.findViewById(R.id.precio_cart_protucto);
+
+                mas = itemView.findViewById(R.id.image_mas);
+                mas.setOnClickListener(this);
+                meno = itemView.findViewById(R.id.image_meno);
+                meno.setOnClickListener(this);
+                cant = itemView.findViewById(R.id.text_cant);
+                cant.setText("1");
+            }
+
+            @Override
+            public void onClick(View v) {
+                ImageView b = (ImageView) v;
+                int quant= Integer.parseInt(cant.getText().toString());
+                double quantTotal= Double.parseDouble(totalPrecio.getText().toString());
+                switch(b.getId()) {
+                    case R.id.image_mas:
+                        quant++;
+                        quantTotal+=10;
+                        cant.setText(Integer.toString(quant));
+                        totalPrecio.setText(Double.toString(quantTotal));
+                        break;
+                    case R.id.image_meno:
+                        if (quant !=0){
+                            quant--;
+                            quantTotal-=10;
+                            cant.setText(Integer.toString(quant));
+                            totalPrecio.setText(Double.toString(quantTotal));
+                        }
+                        break;
+                }
             }
         }
     }

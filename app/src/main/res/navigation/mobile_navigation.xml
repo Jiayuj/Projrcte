@@ -11,10 +11,10 @@
         android:label="Noticicion"
         tools:layout="@layout/fragment_notify" />
     <fragment
-        android:id="@+id/drawer2Fragment"
-        android:name="com.example.projrcte.Drawer2Fragment"
-        android:label="fragment_drawer2"
-        tools:layout="@layout/fragment_drawer2" />
+        android:id="@+id/chatFragment"
+        android:name="com.example.projrcte.ChatFragment"
+        android:label="Chat"
+        tools:layout="@layout/fragment_chat" />
     <fragment
         android:id="@+id/drawer3Fragment"
         android:name="com.example.projrcte.Drawer3Fragment"
@@ -60,4 +60,9 @@
         android:name="com.example.projrcte.DetalleCartFragment"
         android:label="fragment_detalle_cart"
         tools:layout="@layout/fragment_detalle_cart" />
+    <fragment
+        android:id="@+id/detallChatFragment"
+        android:name="com.example.projrcte.DetallChatFragment"
+        android:label="Nombre"
+        tools:layout="@layout/fragment_detall_chat" />
 </navigation>

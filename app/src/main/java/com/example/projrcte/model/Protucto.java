@@ -7,8 +7,7 @@ import androidx.room.PrimaryKey;
 public class Protucto {
     @PrimaryKey(autoGenerate = true)
     public int id;
-
     public String nombre;
     public String descripcion;
-
+    public String precio;
 }

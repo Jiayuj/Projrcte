@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.projrcte.bd.AppBBDD;
 import com.example.projrcte.bd.AppDao;
+import com.example.projrcte.model.Protucto;
 import com.example.projrcte.model.Restaurante;
 import com.example.projrcte.model.User;
 
@@ -31,9 +32,18 @@ public class ViewModel extends AndroidViewModel {
     public MutableLiveData<String> elementoCart = new MutableLiveData<>();
     HashSet<String> restaurantes = new HashSet<>();
 
+    public MutableLiveData<List<Protucto>> listaProtuct = new MutableLiveData<>();
+    public MutableLiveData<Protucto> productoSeleccionado = new MutableLiveData<>();
+
+    public MutableLiveData<List<Protucto>> listaCartProtuct = new MutableLiveData<>();
+    HashSet<Protucto> listaProtuctoCart = new HashSet<>();
+
+    public Boolean tutoriaStatus = false;
+
     public ViewModel(@NonNull Application application) {
         super(application);
         rellenarListaElementos();
+        rellenarListaProtucto();
         appDao = AppBBDD.getInstance(application).appDao();
 
     }
@@ -106,5 +116,36 @@ public class ViewModel extends AndroidViewModel {
     }
     public void establecerElementoCart(String nomTienda){
         elementoCart.setValue(nomTienda);
+    }
+
+    public void rellenarListaProtucto(){
+        List<Protucto> protuctos = new ArrayList<>();
+        for (int i = 0; i < 25; i++) {
+            Protucto protucto = new Protucto();
+            protucto.id = i;
+            protucto.nombre = "Protucto " + i;
+            protucto.descripcion= "Descripcion " + i;
+            protucto.precio ="Precio "+ i;
+            protuctos.add(protucto);
+        }
+        listaProtuct.setValue(protuctos);
+    }
+    public void establecerProtucto(Protucto protucto){
+        Log.d("qq", "onChanged: 111");
+        productoSeleccionado.setValue(protucto);
+    }
+
+    public void rellenarListaCartProtucto(Protucto protucto){
+        listaProtuctoCart.add(protucto);
+        Log.d("qq", "onChanged: 1111");
+        List<Protucto> list = new ArrayList<Protucto>(listaProtuctoCart);
+        listaCartProtuct.setValue(list);
+    }
+    public Boolean getTutoriaStatus() {
+        return tutoriaStatus;
+    }
+
+    public void setTutoriaStatus(Boolean tutoriaStatus) {
+        this.tutoriaStatus = tutoriaStatus;
     }
 }

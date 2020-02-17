@@ -12,6 +12,7 @@ public class Restaurante {
 
     public Restaurante() {
     }
+
     public Restaurante(int id, String nombre, String descripcion) {
         this.id = id;
         this.nombre = nombre;

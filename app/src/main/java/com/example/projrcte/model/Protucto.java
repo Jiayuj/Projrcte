@@ -10,4 +10,7 @@ public class Protucto {
     public String nombre;
     public String descripcion;
     public String precio;
+
+    public Protucto() {
+    }
 }

@@ -36,12 +36,17 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.projrcte.model.Restaurante;
 import com.example.projrcte.R;
 import com.example.projrcte.ViewModel;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.getkeepsafe.taptargetview.TapTargetView;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,17 +86,27 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         navController = Navigation.findNavController(view);
 
         RecyclerView elementosRecyclerView = view.findViewById(R.id.item_list);
-        elementosRecyclerView.addItemDecoration(new DividerItemDecoration(elementosRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
+//        elementosRecyclerView.addItemDecoration(new DividerItemDecoration(elementosRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
+//
+//        elementosAdapter = new ElementosAdapter();
+//        elementosRecyclerView.setAdapter(elementosAdapter);
+//
+//        viewModel1.listaElementos.observe(getViewLifecycleOwner(), new Observer<List<Restaurante>>() {
+//            @Override
+//            public void onChanged(List<Restaurante> restaurantes) {
+//                elementosAdapter.establecerListaElementos(restaurantes);
+//            }
+//        });
 
-        elementosAdapter = new ElementosAdapter();
-        elementosRecyclerView.setAdapter(elementosAdapter);
+        Query query = FirebaseFirestore.getInstance().collection("Restaurantes").limit(50);
 
-        viewModel1.listaElementos.observe(getViewLifecycleOwner(), new Observer<List<Restaurante>>() {
-            @Override
-            public void onChanged(List<Restaurante> restaurantes) {
-                elementosAdapter.establecerListaElementos(restaurantes);
-            }
-        });
+        FirestoreRecyclerOptions<Restaurante> options = new FirestoreRecyclerOptions.Builder<Restaurante>()
+                .setQuery(query, Restaurante.class)
+                .setLifecycleOwner(this)
+                .build();
+
+        elementosRecyclerView.setAdapter(new ElementosAdapter(options));
+
 
         tapTargetSequence = new TapTargetSequence(requireActivity());
         tapTargetSequence.targets(
@@ -154,10 +169,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     }
 
-    class ElementosAdapter extends RecyclerView.Adapter<ElementosAdapter.ElementoViewHolder> implements Filterable {
-
-        List<Restaurante> restaurantes;
-        private List<Restaurante> orig;
+    class ElementosAdapter extends FirestoreRecyclerAdapter<Restaurante,ElementosAdapter.ElementoViewHolder> implements Filterable {
+        public ElementosAdapter(@NonNull FirestoreRecyclerOptions<Restaurante> options) {super(options);}
 
         @NonNull
         @Override
@@ -166,13 +179,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ElementoViewHolder holder, final int position) {
+        protected void onBindViewHolder(@NonNull ElementoViewHolder holder, int position, @NonNull final Restaurante restaurante) {
 
-            final Restaurante restaurante = restaurantes.get(position);
 
             holder.nombreTextView.setText(restaurante.nombre);
             holder.descripcionTextView.setText(restaurante.descripcion);
-
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -184,43 +195,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         }
 
         @Override
-        public int getItemCount() {
-            return restaurantes == null ? 0 : restaurantes.size();
-        }
-
-        public void establecerListaElementos(List<Restaurante> restaurantes) {
-            this.restaurantes = restaurantes;
-            notifyDataSetChanged();
-        }
-
-        @Override
         public Filter getFilter() {
-            return new Filter() {
-                @Override
-                protected FilterResults performFiltering(CharSequence constraint) {
-                    final FilterResults oReturn = new FilterResults();
-                    final List<Restaurante> results = new ArrayList<>();
-                    if (orig == null)
-                        orig  = restaurantes;
-                    if (constraint != null){
-                        if(orig !=null & orig.size()>0 ){
-                            for ( final Restaurante g :orig) {
-                                if (g.getNombre().toLowerCase().contains(constraint.toString().toLowerCase()));
-                            }
-                        }
-                        oReturn.values = results;
-                    }
-                    return oReturn;
-                }
-
-                @Override
-                protected void publishResults(CharSequence constraint, FilterResults results) {
-                    restaurantes= (ArrayList<Restaurante>)results.values;
-                    notifyDataSetChanged();
-
-                }
-            };
+            return null;
         }
+
 
         class ElementoViewHolder extends RecyclerView.ViewHolder {
             TextView nombreTextView, descripcionTextView;

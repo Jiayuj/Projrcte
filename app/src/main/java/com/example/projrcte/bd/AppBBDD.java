@@ -12,7 +12,7 @@ import com.example.projrcte.model.Protucto;
 import com.example.projrcte.model.Restaurante;
 import com.example.projrcte.model.User;
 
-@Database(entities = {User.class, Restaurante.class, Protucto.class
+@Database(entities = {User.class, Protucto.class
 }, version = 3,exportSchema = false)
 public abstract class AppBBDD extends RoomDatabase {
     public static AppBBDD appBBDD;

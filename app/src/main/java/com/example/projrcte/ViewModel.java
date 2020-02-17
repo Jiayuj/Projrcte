@@ -38,14 +38,14 @@ public class ViewModel extends AndroidViewModel {
     public MutableLiveData<List<Protucto>> listaCartProtuct = new MutableLiveData<>();
     HashSet<Protucto> listaProtuctoCart = new HashSet<>();
 
-    public Boolean tutoriaStatus = false;
+    public Boolean tutoriaStatus;
 
     public ViewModel(@NonNull Application application) {
         super(application);
-        rellenarListaElementos();
+//        rellenarListaElementos();
         rellenarListaProtucto();
         appDao = AppBBDD.getInstance(application).appDao();
-
+        tutoriaStatus=false;
     }
 
     public User comprobarAccer (final String email, final String pass) {

@@ -23,7 +23,7 @@ public interface  AppDao  {
    @Insert
    public void insertarUser(User user);
 
-   @Insert
-   public void insertarRestaurante(Restaurante restaurante);
+//   @Insert
+//   public void insertarRestaurante(Restaurante restaurante);
 
 }

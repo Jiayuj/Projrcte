@@ -43,7 +43,7 @@ public class ViewModel extends AndroidViewModel {
     public ViewModel(@NonNull Application application) {
         super(application);
 //        rellenarListaElementos();
-        rellenarListaProtucto();
+//        rellenarListaProtucto();
         appDao = AppBBDD.getInstance(application).appDao();
         tutoriaStatus=false;
     }
@@ -93,54 +93,54 @@ public class ViewModel extends AndroidViewModel {
         });
     }
 
-    public void rellenarListaElementos(){
-        List<Restaurante> restaurantes = new ArrayList<>();
-        for (int i = 0; i < 25; i++) {
-            Restaurante restaurante = new Restaurante();
-            restaurante.id = i;
-            restaurante.nombre = "Restaurante " + i;
-            restaurante.descripcion = "Descripcion " + i;
-            restaurantes.add(restaurante);
-        }
-        listaElementos.setValue(restaurantes);
-    }
-    public void establecerElementoSeleccionado(Restaurante restaurante){
+//    public void rellenarListaElementos(){
+//        List<Restaurante> restaurantes = new ArrayList<>();
+//        for (int i = 0; i < 25; i++) {
+//            Restaurante restaurante = new Restaurante();
+//            restaurante.id =  i;
+//            restaurante.nombre = "Restaurante " + i;
+//            restaurante.descripcion = "Descripcion " + i;
+//            restaurantes.add(restaurante);
+//        }
+//        listaElementos.setValue(restaurantes);
+//    }
+    public void establecerRestauranteSeleccionado(Restaurante restaurante){
         elementoSeleccionado.setValue(restaurante);
     }
-
-    public void rellenarListaCart(String nomTienda){
-        restaurantes.add(nomTienda);
-        List<String> list = new ArrayList<String>(restaurantes);
-        listaCart.setValue(list);
-
-    }
-    public void establecerElementoCart(String nomTienda){
-        elementoCart.setValue(nomTienda);
-    }
-
-    public void rellenarListaProtucto(){
-        List<Protucto> protuctos = new ArrayList<>();
-        for (int i = 0; i < 25; i++) {
-            Protucto protucto = new Protucto();
-            protucto.id = i;
-            protucto.nombre = "Protucto " + i;
-            protucto.descripcion= "Descripcion " + i;
-            protucto.precio ="Precio "+ i;
-            protuctos.add(protucto);
-        }
-        listaProtuct.setValue(protuctos);
-    }
-    public void establecerProtucto(Protucto protucto){
-        Log.d("qq", "onChanged: 111");
-        productoSeleccionado.setValue(protucto);
-    }
-
-    public void rellenarListaCartProtucto(Protucto protucto){
-        listaProtuctoCart.add(protucto);
-        Log.d("qq", "onChanged: 1111");
-        List<Protucto> list = new ArrayList<Protucto>(listaProtuctoCart);
-        listaCartProtuct.setValue(list);
-    }
+//
+//    public void rellenarListaCart(String nomTienda){
+//        restaurantes.add(nomTienda);
+//        List<String> list = new ArrayList<String>(restaurantes);
+//        listaCart.setValue(list);
+//
+//    }
+//    public void establecerElementoCart(String nomTienda){
+//        elementoCart.setValue(nomTienda);
+//    }
+//
+//    public void rellenarListaProtucto(){
+//        List<Protucto> protuctos = new ArrayList<>();
+//        for (int i = 0; i < 25; i++) {
+//            Protucto protucto = new Protucto();
+//            protucto.id = i;
+//            protucto.nombre = "Protucto " + i;
+//            protucto.descripcion= "Descripcion " + i;
+//            protucto.precio ="Precio "+ i;
+//            protuctos.add(protucto);
+//        }
+//        listaProtuct.setValue(protuctos);
+//    }
+//    public void establecerProtucto(Protucto protucto){
+//        Log.d("qq", "onChanged: 111");
+//        productoSeleccionado.setValue(protucto);
+//    }
+//
+//    public void rellenarListaCartProtucto(Protucto protucto){
+//        listaProtuctoCart.add(protucto);
+//        Log.d("qq", "onChanged: 1111");
+//        List<Protucto> list = new ArrayList<Protucto>(listaProtuctoCart);
+//        listaCartProtuct.setValue(list);
+//    }
     public Boolean getTutoriaStatus() {
         return tutoriaStatus;
     }

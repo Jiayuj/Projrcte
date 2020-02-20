@@ -101,7 +101,7 @@ public class CartFragment extends Fragment {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    viewModel1.establecerElementoCart(restaurantes.get(position));
+//                    viewModel1.establecerElementoCart(restaurantes.get(position));
                     navController.navigate(R.id.detalleCartFragment);
                 }
             });

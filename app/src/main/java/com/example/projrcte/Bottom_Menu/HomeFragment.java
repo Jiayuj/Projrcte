@@ -1,42 +1,27 @@
 package com.example.projrcte.Bottom_Menu;
 
 
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.style.StyleSpan;
-import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.projrcte.model.Restaurante;
 import com.example.projrcte.R;
 import com.example.projrcte.ViewModel;
@@ -44,13 +29,8 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
-import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 
 /**
@@ -180,7 +160,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
         @Override
         protected void onBindViewHolder(@NonNull ElementoViewHolder holder, int position, @NonNull final Restaurante restaurante) {
-
+            final String restaurantId = getSnapshots().getSnapshot(position).getId();
 
             holder.nombreTextView.setText(restaurante.nombre);
             holder.descripcionTextView.setText(restaurante.descripcion);
@@ -188,7 +168,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    viewModel1.establecerElementoSeleccionado(restaurante);
+                    restaurante.id = restaurantId;
+                    viewModel1.establecerRestauranteSeleccionado(restaurante);
                     navController.navigate(R.id.tiendaFragment);
                 }
             });

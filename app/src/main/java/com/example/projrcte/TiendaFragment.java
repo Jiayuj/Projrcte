@@ -18,10 +18,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.example.projrcte.model.Protucto;
 import com.example.projrcte.model.Restaurante;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.util.List;
 
@@ -63,6 +69,7 @@ public class TiendaFragment extends Fragment {
         nombreTextView = view.findViewById(R.id.nomd);
         descripcionTextView = view.findViewById(R.id.descd);
 
+        final RecyclerView protuctoRecyclerView = view.findViewById(R.id.item_list_product);
 
         viewModel.elementoSeleccionado.observe(getViewLifecycleOwner(), new Observer<Restaurante>() {
             @Override
@@ -71,38 +78,55 @@ public class TiendaFragment extends Fragment {
 
                 nombreTextView.setText(restaurante.nombre);
                 descripcionTextView.setText(restaurante.descripcion);
+
+                consultarProductos(restaurante.id, protuctoRecyclerView);
             }
         });
 
-        RecyclerView protuctoRecyclerView = view.findViewById(R.id.item_list_product);
-        protuctoRecyclerView.addItemDecoration(new DividerItemDecoration(protuctoRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
-        protuctoAdapter = new ProtuctoAdapter();
-        protuctoRecyclerView.setAdapter(protuctoAdapter);
 
-        viewModel.listaProtuct.observe(getViewLifecycleOwner(), new Observer<List<Protucto>>() {
-            @Override
-            public void onChanged(List<Protucto> protuctos) {
-                protuctoAdapter.establecerListaProtuto(protuctos);
 
-            }
-        });
+
+//        protuctoRecyclerView.addItemDecoration(new DividerItemDecoration(protuctoRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
+
+//        protuctoAdapter = new ProtuctoAdapter();
+//        protuctoRecyclerView.setAdapter(protuctoAdapter);
+//
+//        viewModel.listaProtuct.observe(getViewLifecycleOwner(), new Observer<List<Protucto>>() {
+//            @Override
+//            public void onChanged(List<Protucto> protuctos) {
+//                protuctoAdapter.establecerListaProtuto(protuctos);
+//
+//            }
+//        });
+
+
     }
 
-    class ProtuctoAdapter extends RecyclerView.Adapter<ProtuctoAdapter.ProtuctoViewHolder> {
+    void consultarProductos(String restauranteId , RecyclerView protuctoRecyclerView){
+        Query query = FirebaseFirestore.getInstance().collection("Restaurantes").document(restauranteId).collection("Productos");
+        FirestoreRecyclerOptions<Protucto> options = new FirestoreRecyclerOptions.Builder<Protucto>()
+                .setQuery(query, Protucto.class)
+                .setLifecycleOwner(this)
+                .build();
 
-        List<Protucto> protuctos;
+        Log.d("qqqqq", query.toString());
+        protuctoRecyclerView.setAdapter(new ProtuctoAdapter(options));
+
+    }
+
+    class ProtuctoAdapter extends FirestoreRecyclerAdapter<Protucto, ProtuctoAdapter.ProtuctoViewHolder> implements Filterable {
+        public ProtuctoAdapter(@NonNull FirestoreRecyclerOptions<Protucto> options) {super(options);}
 
         @NonNull
         @Override
-        public ProtuctoAdapter.ProtuctoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        public ProtuctoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             return new ProtuctoViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_product, parent, false));
         }
 
-        @Override
-        public void onBindViewHolder(@NonNull ProtuctoViewHolder holder, final int position) {
 
-            final Protucto protucto = protuctos.get(position);
+        @Override
+        protected void onBindViewHolder(@NonNull ProtuctoViewHolder holder, int position, @NonNull final Protucto protucto) {
 
             holder.nombreProtucto.setText(protucto.nombre);
             holder.descripcionProtuto.setText(protucto.descripcion);
@@ -111,7 +135,7 @@ public class TiendaFragment extends Fragment {
             holder.itemView.findViewById(button_add).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    viewModel.establecerProtucto(protucto);
+//                    viewModel.establecerProtucto(protucto);
                     final androidx.appcompat.app.AlertDialog dialog = new AlertDialog.Builder(requireContext())
                             .setMessage("Añadir al carrito?")
                             .setPositiveButton("Si", new DialogInterface.OnClickListener() {
@@ -122,11 +146,10 @@ public class TiendaFragment extends Fragment {
                                         @Override
                                         public void onChanged(final Protucto protucto) {
                                             if(protucto == null) return;
-                                            Log.d("qq", "onChanged: 111111");
-                                            viewModel.rellenarListaCartProtucto(protucto);
+//                                            viewModel.rellenarListaCartProtucto(protucto);
                                         }
                                     });
-                                    viewModel.rellenarListaCart(nombreTienda);
+//                                    viewModel.rellenarListaCart(nombreTienda);
                                 }
                             })
                             .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -138,16 +161,13 @@ public class TiendaFragment extends Fragment {
                             .show();
                 }
             });
+
         }
+
 
         @Override
-        public int getItemCount() {
-            return protuctos  == null ? 0 : protuctos.size();
-        }
-
-        public void establecerListaProtuto(List<Protucto> protuctos) {
-            this.protuctos = protuctos;
-            notifyDataSetChanged();
+        public Filter getFilter() {
+            return null;
         }
 
         class ProtuctoViewHolder extends RecyclerView.ViewHolder {

@@ -19,9 +19,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.projrcte.model.Restaurante;
 import com.example.projrcte.R;
 import com.example.projrcte.ViewModel;
@@ -123,21 +125,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             tapTargetSequence.start();
         }
         searchView = view.findViewById(R.id.simpleSearchView);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if (TextUtils.isEmpty(newText)) {
-                    elementosAdapter.getFilter().filter("");
-                } else {
-                    elementosAdapter.getFilter().filter(newText.toString());
-                }
-                return true;
-            }
-        });
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                if (TextUtils.isEmpty(newText)) {
+//                    elementosAdapter.getFilter().filter("");
+//                } else {
+//                    elementosAdapter.getFilter().filter(newText.toString());
+//                }
+//                return true;
+//            }
+//        });
     }
     @Override
     public void onClick(View v) {
@@ -164,6 +166,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
             holder.nombreTextView.setText(restaurante.nombre);
             holder.descripcionTextView.setText(restaurante.descripcion);
+            Glide.with(requireContext()).load(restaurante.urlImage).into(holder.restauranteImage);
+
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -183,11 +187,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
         class ElementoViewHolder extends RecyclerView.ViewHolder {
             TextView nombreTextView, descripcionTextView;
+            ImageView restauranteImage;
 
             public ElementoViewHolder(@NonNull View itemView) {
                 super(itemView);
                 nombreTextView = itemView.findViewById(R.id.textview_nombre);
                 descripcionTextView = itemView.findViewById(R.id.textview_descripcion);
+                restauranteImage = itemView.findViewById(R.id.imageView8);
             }
         }
     }

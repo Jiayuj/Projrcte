@@ -20,8 +20,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.projrcte.model.Protucto;
 import com.example.projrcte.model.Restaurante;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -44,6 +46,7 @@ public class TiendaFragment extends Fragment {
     ViewModel viewModel;
     ProtuctoAdapter protuctoAdapter;
 
+    ImageView restauranteImage;
     TextView nombreTextView , descripcionTextView;
 
     Protucto protucto11;
@@ -68,6 +71,8 @@ public class TiendaFragment extends Fragment {
 
         nombreTextView = view.findViewById(R.id.nomd);
         descripcionTextView = view.findViewById(R.id.descd);
+        restauranteImage = view.findViewById(R.id.imageView8);
+
 
         final RecyclerView protuctoRecyclerView = view.findViewById(R.id.item_list_product);
 
@@ -78,6 +83,7 @@ public class TiendaFragment extends Fragment {
 
                 nombreTextView.setText(restaurante.nombre);
                 descripcionTextView.setText(restaurante.descripcion);
+                Glide.with(requireContext()).load(restaurante.urlImage).into(restauranteImage);
 
                 consultarProductos(restaurante.id, protuctoRecyclerView);
             }
@@ -131,6 +137,8 @@ public class TiendaFragment extends Fragment {
             holder.nombreProtucto.setText(protucto.nombre);
             holder.descripcionProtuto.setText(protucto.descripcion);
             holder.precioProtucto.setText(protucto.precio);
+            Glide.with(requireContext()).load(protucto.urlImage).into(holder.productoImage);
+
 
             holder.itemView.findViewById(button_add).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -173,13 +181,14 @@ public class TiendaFragment extends Fragment {
         class ProtuctoViewHolder extends RecyclerView.ViewHolder {
             TextView nombreProtucto, descripcionProtuto, precioProtucto;
             Button buttonAdd;
+            ImageView productoImage;
 
             public ProtuctoViewHolder(@NonNull final View itemView) {
                 super(itemView);
                 nombreProtucto = itemView.findViewById(R.id.nombre_protucto);
                 descripcionProtuto = itemView.findViewById(R.id.des_protucto);
                 precioProtucto = itemView.findViewById(R.id.precio_protucto);
-
+                productoImage = itemView.findViewById(R.id.imageView10);
             }
         }
     }

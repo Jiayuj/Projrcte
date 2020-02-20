@@ -9,6 +9,7 @@ public class Restaurante {
     public String nombre;
 
     public String descripcion;
+    public String urlImage;
 
     public Restaurante() {
     }

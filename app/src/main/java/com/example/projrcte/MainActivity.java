@@ -70,10 +70,14 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
 
                 if(user != null){
-                    Glide.with(MainActivity.this)
-                            .load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString())
-                            .circleCrop()
-                            .into(photo);
+                    try {
+                        Glide.with(MainActivity.this)
+                                .load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl().toString())
+                                .circleCrop()
+                                .into(photo);
+                    }catch (NullPointerException e){
+                        photo.setImageResource(R.drawable.ic_account_circle_black_24dp);
+                    }
                     name.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
                     email.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
                 }

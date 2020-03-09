@@ -117,6 +117,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/linearLayout2" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/goNewRestaurante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            tools:ignore="MissingConstraints" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

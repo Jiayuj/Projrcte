@@ -67,6 +67,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         viewModel1 = ViewModelProviders.of(requireActivity()).get(ViewModel.class);
         navController = Navigation.findNavController(view);
 
+        view.findViewById(R.id.goNewRestaurante).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.newRestauranteFragment);
+            }
+        });
+
+
         RecyclerView elementosRecyclerView = view.findViewById(R.id.item_list);
 //        elementosRecyclerView.addItemDecoration(new DividerItemDecoration(elementosRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
 //

@@ -65,4 +65,9 @@
         android:name="com.example.projrcte.DetallChatFragment"
         android:label="Nombre"
         tools:layout="@layout/fragment_detall_chat" />
+    <fragment
+        android:id="@+id/newRestauranteFragment"
+        android:name="com.example.projrcte.NewRestauranteFragment"
+        android:label="fragment_new_restaurante"
+        tools:layout="@layout/fragment_new_restaurante" />
 </navigation>

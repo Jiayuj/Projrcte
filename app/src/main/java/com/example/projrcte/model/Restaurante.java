@@ -1,6 +1,7 @@
 package com.example.projrcte.model;
 
 
+import android.widget.ImageView;
 
 public class Restaurante {
 
@@ -14,11 +15,10 @@ public class Restaurante {
     public Restaurante() {
     }
 
-    public Restaurante(String id, String nombre, String descripcion) {
-        this.id = id;
+    public Restaurante(String nombre, String descripcion, String urlImage) {
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.urlImage = urlImage;
     }
-
 
 }

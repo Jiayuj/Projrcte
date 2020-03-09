@@ -127,7 +127,7 @@ public class NewRestauranteFragment extends Fragment {
     private void guardarEnFirestore(String restName, String infoRest) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        Restaurante restaurante = new Restaurante(restName, infoRest, filePath.get);
+        Restaurante restaurante = new Restaurante(restName, infoRest, filePath);
 
         FirebaseFirestore.getInstance().collection("Restaurantes")
                 .add(restaurante)
